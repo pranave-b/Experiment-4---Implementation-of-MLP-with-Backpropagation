@@ -1,7 +1,7 @@
-# Experiment-4---Implementation-of-MLP-with-Backpropagation
+# Experiment-3---Implementation-of-MLP-with-Backpropagation
 
 ## AIM:
-To implement a Multilayer Perceptron for Multi classification
+To implement a Multilayer Perceptron for Multi classification.
 
 ## EQUIPMENTS REQUIRED:
 Hardware – PCs
@@ -118,7 +118,70 @@ Normalize our dataset.
 8. Finally, call the functions confusion_matrix(), and the classification_report() in order to evaluate the performance of our classifier.
 
 ## PROGRAM 
+```
+NAME : Pranave B
+REG NO: 212221240040
+```
+```
+import pandas as pd
+import sklearn
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report,confusion_matrix
 
-## OUTPUT 
+d=pd.read_csv("IRIS.csv")
+
+X=d.iloc[:,0:4]
+
+Y=d.select_dtypes(include=[object])
+
+X.head()
+
+Y.head()
+
+Y.species.unique()
+
+le=preprocessing.LabelEncoder()
+Y=Y.apply(le.fit_transform)
+Y.head()
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.20)
+
+scaler=StandardScaler()
+
+scaler.fit(X_train)
+
+X_train=scaler.transform(X_train)
+
+X_test=scaler.transform(X_test)
+
+mlp= MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+
+mlp.fit(X_train,Y_train.values.ravel())
+pred=mlp.predict(X_test)
+print(pred)
+
+print(confusion_matrix(Y_test,pred))
+print(classification_report(Y_test,pred))
+```
+
+## OUTPUT
+### X HEAD
+![](1.png)
+### Y HEAD
+![](2.png)
+### Y.SPECIES.UNIQUE
+![](3.png)
+### HEAD AFTER LABEL ENCODING
+![](4.png)
+### MPL CLASSIFIER
+![](5.png)
+### CONFUSION MATRIX
+![](6.png)
+### CLASSIFICATION REPORT
+![](7.png)
 
 ## RESULT
+Thus we have implemented a Multilayer Perceptron for Multi classification.
